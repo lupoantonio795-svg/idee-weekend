@@ -27,8 +27,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 img{display:block;max-width:100%}
 button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 a{color:inherit;text-decoration:none}
-
-/* NAV */
 nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.5rem;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:var(--shadow)}
 .logo{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;display:flex;align-items:center;gap:.5rem}
 .nav-right{display:flex;align-items:center;gap:.75rem}
@@ -36,21 +34,13 @@ nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.
 .btn-add:hover{background:var(--green-hover)}
 .btn-theme{padding:.4rem;border-radius:2rem;border:1.5px solid var(--border);display:flex;align-items:center;transition:background .18s}
 .btn-theme:hover{background:var(--surface2)}
-
-/* HERO */
 .hero{background:linear-gradient(135deg,#2d7a4f 0%,#1e5f9e 100%);color:#fff;padding:2.5rem 1.5rem 3rem;text-align:center}
 .hero h1{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:.5rem}
 .hero p{opacity:.85;font-size:1rem;max-width:44ch;margin:0 auto}
-
-/* FILTERS */
 .filters{max-width:1100px;margin:0 auto;padding:1.75rem 1.5rem .5rem;display:flex;gap:.6rem;flex-wrap:wrap}
 .filter-btn{padding:.5rem 1.1rem;border-radius:2rem;border:1.5px solid var(--border);font-size:.85rem;font-weight:500;background:var(--surface);transition:all .18s;white-space:nowrap}
 .filter-btn:hover,.filter-btn.active{border-color:var(--green);background:var(--green-light);color:var(--green)}
-
-/* GRID */
 .grid{max-width:1100px;margin:0 auto;padding:1rem 1.5rem 3rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem}
-
-/* CARD */
 .card{background:var(--surface);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s;cursor:pointer}
 .card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
 .card-img{aspect-ratio:16/9;overflow:hidden;position:relative}
@@ -73,12 +63,8 @@ nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.
 .like-btn.liked{border-color:#e55;background:#fff0f0;color:#e55}
 .like-btn .heart{font-size:.95rem;transition:transform .15s}
 .like-btn:active .heart{transform:scale(1.4)}
-
-/* EMPTY */
 .empty{text-align:center;padding:4rem 1.5rem;color:var(--muted);grid-column:1/-1}
 .empty-icon{font-size:3rem;margin-bottom:1rem}
-
-/* MODAL */
 .overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.5);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:1rem}
 .overlay.open{display:flex}
 .modal{background:var(--surface);border-radius:1.5rem;max-width:520px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg);position:relative}
@@ -88,8 +74,11 @@ nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.
 .modal-cat{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:.35rem}
 .modal-title{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;margin-bottom:.6rem}
 .modal-desc{color:var(--muted);font-size:.92rem;line-height:1.7;margin-bottom:1rem}
-.modal-info{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1.25rem}
+.modal-info{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
 .info-chip{display:flex;align-items:center;gap:.3rem;font-size:.8rem;padding:.3rem .7rem;background:var(--surface2);border-radius:2rem;color:var(--muted)}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:1.25rem}
+.gallery img{border-radius:.5rem;aspect-ratio:4/3;object-fit:cover;width:100%;cursor:pointer;transition:opacity .18s}
+.gallery img:hover{opacity:.82}
 .modal-actions{display:flex;gap:.75rem}
 .modal-like{flex:1;padding:.7rem;border-radius:2rem;font-weight:600;font-size:.9rem;border:1.5px solid var(--border);transition:all .18s;display:flex;align-items:center;justify-content:center;gap:.4rem}
 .modal-like:hover,.modal-like.liked{border-color:#e55;background:#fff0f0;color:#e55}
@@ -97,8 +86,6 @@ nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.
 .modal-maps:hover{background:var(--green-hover)}
 .close-btn{position:absolute;top:.9rem;right:.9rem;background:rgba(255,255,255,.9);backdrop-filter:blur(4px);border-radius:2rem;padding:.4rem;display:flex;box-shadow:var(--shadow);transition:background .18s}
 .close-btn:hover{background:#fff}
-
-/* ADD FORM MODAL */
 .form-modal{background:var(--surface);border-radius:1.5rem;max-width:480px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg);padding:1.75rem}
 .form-title{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;margin-bottom:1.25rem}
 .field{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem}
@@ -111,8 +98,6 @@ nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.
 .btn-submit:hover{background:var(--green-hover)}
 .btn-cancel{flex:1;padding:.7rem;border-radius:2rem;border:1.5px solid var(--border);font-weight:600;font-size:.9rem;transition:background .18s}
 .btn-cancel:hover{background:var(--surface2)}
-
-/* RESPONSIVE */
 @media(max-width:500px){
   nav{padding:0 1rem}
   .grid{padding:1rem 1rem 3rem}
@@ -157,6 +142,7 @@ nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.
       <h2 class="modal-title" id="mTitle"></h2>
       <p class="modal-desc" id="mDesc"></p>
       <div class="modal-info" id="mInfo"></div>
+      <div class="gallery" id="mGallery"></div>
       <div class="modal-actions">
         <button class="modal-like" id="mLikeBtn" onclick="toggleLikeModal()">❤️ <span id="mLikeCount"></span> Mi piace</button>
         <a class="modal-maps" id="mMaps" href="#" target="_blank" rel="noopener">📍 Google Maps</a>
@@ -175,32 +161,18 @@ nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.
       </button>
     </div>
     <form onsubmit="submitIdea(event)">
-      <div class="field">
-        <label>Titolo *</label>
-        <input type="text" id="fTitle" placeholder="es. Lago di Lugano in bici" required>
-      </div>
-      <div class="field">
-        <label>Categoria *</label>
+      <div class="field"><label>Titolo *</label><input type="text" id="fTitle" placeholder="es. Lago di Lugano in bici" required></div>
+      <div class="field"><label>Categoria *</label>
         <select id="fCat" required>
           <option value="">— scegli —</option>
           <option value="trekking">🥾 Trekking facile</option>
           <option value="bici">🚲 Giro in bici</option>
         </select>
       </div>
-      <div class="field">
-        <label>Descrizione</label>
-        <textarea id="fDesc" placeholder="Dove si va, quanto dura, cosa si vede…"></textarea>
-      </div>
-      <div class="field">
-        <label>Distanza (es. 12 km)</label>
-        <input type="text" id="fDist" placeholder="12 km">
-      </div>
-      <div class="field">
-        <label>Durata (es. 3h)</label>
-        <input type="text" id="fDur" placeholder="3h">
-      </div>
-      <div class="field">
-        <label>Difficoltà</label>
+      <div class="field"><label>Descrizione</label><textarea id="fDesc" placeholder="Dove si va, quanto dura, cosa si vede…"></textarea></div>
+      <div class="field"><label>Distanza (es. 12 km)</label><input type="text" id="fDist" placeholder="12 km"></div>
+      <div class="field"><label>Durata (es. 3h)</label><input type="text" id="fDur" placeholder="3h"></div>
+      <div class="field"><label>Difficoltà</label>
         <select id="fDiff">
           <option value="">—</option>
           <option value="Facile">Facile</option>
@@ -208,10 +180,7 @@ nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.
           <option value="Impegnativa">Impegnativa</option>
         </select>
       </div>
-      <div class="field">
-        <label>Link Google Maps</label>
-        <input type="url" id="fMaps" placeholder="https://maps.google.com/...">
-      </div>
+      <div class="field"><label>Link Google Maps</label><input type="url" id="fMaps" placeholder="https://maps.google.com/..."></div>
       <div class="form-actions">
         <button type="button" class="btn-cancel" onclick="closeModal('addOverlay')">Annulla</button>
         <button type="submit" class="btn-submit">✅ Aggiungi</button>
@@ -221,7 +190,6 @@ nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.
 </div>
 
 <script>
-// ── DATI INIZIALI ──
 let ideas = [
   {
     id:1, cat:'trekking', title:'Sentiero del Tinazzo — Prealpi Varesine',
@@ -246,10 +214,10 @@ let ideas = [
   },
   {
     id:4, cat:'trekking', title:'Tre Corni — Prealpi Bergamasche',
-    desc:'Escursione a tre cime panoramiche sopra il paese di Adrara San Martino (BG). Paesaggio aperto, vista su lago d\'Iseo e pianura. Dislivello 500 m.',
+    desc:"Escursione a tre cime panoramiche sopra il paese di Adrara San Martino (BG). Paesaggio aperto, vista su lago d'Iseo e pianura. Dislivello 500 m.",
     dist:'10 km', dur:'3.5h', diff:'Facile', img:'hills-panorama-lombardia',
     maps:'https://maps.google.com/?q=Adrara+San+Martino+Bergamo',
-    tags:['Cime','Lago d\'Iseo','Bergamo'], likes:2
+    tags:["Cime","Lago d'Iseo","Bergamo"], likes:2
   },
   {
     id:5, cat:'bici', title:'Parco Nord Milano',
@@ -279,67 +247,50 @@ let ideas = [
     maps:'https://maps.google.com/?q=Parco+Nord+Milano+Monza',
     tags:['Punto-punto','Lambro','22 km'], likes:5
   },
-{
-  id: 9,
-  cat: 'trekking',
-  title: 'Sacro Monte di Somasca e Castello dell\'Innominato',
-  desc: 'Escursione adatta a tutti, bambini inclusi. Si parte dal parcheggio di Somasca e si sale tra boschi e storia fino al Sacro Monte di Somasca e alle rovine del Castello dell\'Innominato — quello manzoniano dei Promessi Sposi. La meta è il Rifugio Camposecco, dove chi vuole può pranzare al rifugio oppure godersi una pausa con pranzo al sacco. Salita circa 1h–1h30, discesa 1h. Panorama sulle Prealpi Lecchesi.',
-  dist: '~5 km',
-  dur: '2.5–3h totali',
-  diff: 'Facile',
-  img: 'somasca/copertina.jpg',
-  gallery: [
-    'somasca/copertina.jpg',
-    'somasca/rocca dell\'innominato somasca-2.jpg',
-    'somasca/somasca.jpg',
-    'somasca/somasca2.jpg'
-  ],
-  maps: 'https://maps.app.goo.gl/58dPiBFQ4w6WDXkD7',
-  tags: ['Bambini OK', 'Storico', 'Rifugio', 'Promessi Sposi', '300 m D+'],
-  likes: 0
-}
+  {
+    id:9, cat:'trekking', title:"Sacro Monte di Somasca e Castello dell'Innominato",
+    desc:"Escursione adatta a tutti, bambini inclusi. Si parte dal parcheggio di Somasca e si sale tra boschi e storia fino al Sacro Monte di Somasca e alle rovine del Castello dell'Innominato — quello manzoniano dei Promessi Sposi. La meta è il Rifugio Camposecco, dove chi vuole può pranzare al rifugio oppure godersi una pausa con pranzo al sacco. Salita circa 1h–1h30, discesa 1h. Panorama sulle Prealpi Lecchesi.",
+    dist:'~5 km', dur:'2.5–3h totali', diff:'Facile',
+    img:'somasca/copertina.jpg',
+    gallery:[
+      'somasca/copertina.jpg',
+      'somasca/rocca-innominato.jpg',
+      'somasca/somasca.jpg',
+      'somasca/somasca2.jpg'
+    ],
+    maps:'https://maps.app.goo.gl/58dPiBFQ4w6WDXkD7',
+    tags:['Bambini OK','Storico','Rifugio','Promessi Sposi','300 m D+'], likes:0
+  }
 ];
 
 let likes = {};
 let currentId = null;
 let activeFilter = 'all';
 
-// Carica likes da localStorage
 try {
   const saved = localStorage.getItem('wb_likes');
   if(saved) likes = JSON.parse(saved);
   const savedIdeas = localStorage.getItem('wb_ideas');
-  if(savedIdeas) {
-    const extra = JSON.parse(savedIdeas);
-    ideas = ideas.concat(extra);
-  }
+  if(savedIdeas) ideas = ideas.concat(JSON.parse(savedIdeas));
 } catch(e){}
 
-function saveLikes() {
-  try { localStorage.setItem('wb_likes', JSON.stringify(likes)); } catch(e){}
+function saveLikes(){ try{ localStorage.setItem('wb_likes', JSON.stringify(likes)); }catch(e){} }
+
+function imgUrl(src){
+  if(!src) return 'https://picsum.photos/seed/default/640/360';
+  if(src.startsWith('http') || src.includes('/')) return src;
+  return 'https://picsum.photos/seed/'+src+'/640/360';
 }
 
-// ── RENDER ──
-function imgUrl(seed) {
-  if(seed.startsWith('somasca/') || seed.startsWith('foto/') || seed.startsWith('http')) return seed;
-  return 'https://picsum.photos/seed/'+seed+'/640/360';
-}
+function catLabel(cat){ return cat==='trekking' ? '🥾 Trekking facile' : '🚲 Giro in bici'; }
+function catClass(cat){ return cat==='trekking' ? 'cat-trekking' : 'cat-bici'; }
+function catTextClass(cat){ return cat==='trekking' ? 'cat-trekking-text' : 'cat-bici-text'; }
 
-function catLabel(cat) {
-  return cat==='trekking' ? '🥾 Trekking facile' : '🚲 Giro in bici';
-}
-function catClass(cat) {
-  return cat==='trekking' ? 'cat-trekking' : 'cat-bici';
-}
-function catTextClass(cat) {
-  return cat==='trekking' ? 'cat-trekking-text' : 'cat-bici-text';
-}
-
-function renderGrid() {
+function renderGrid(){
   const filtered = ideas.filter(i => activeFilter==='all' || i.cat===activeFilter);
   const grid = document.getElementById('grid');
-  if(!filtered.length) {
-    grid.innerHTML = '<div class="empty"><div class="empty-icon">🌿</div><p>Nessuna idea qui ancora.<br>Aggiungine una!</p></div>';
+  if(!filtered.length){
+    grid.innerHTML='<div class="empty"><div class="empty-icon">🌿</div><p>Nessuna idea qui ancora.<br>Aggiungine una!</p></div>';
     return;
   }
   grid.innerHTML = filtered.map(idea => {
@@ -371,38 +322,33 @@ function renderGrid() {
   }).join('');
 }
 
-// ── LIKE ──
-function toggleLike(id, btn) {
+function toggleLike(id, btn){
   likes[id] = !likes[id];
   saveLikes();
   const idea = ideas.find(i=>i.id===id);
   const count = (idea.likes||0) + (likes[id]?1:0);
-  const heart = btn.querySelector('.heart');
-  const num = btn.querySelector('.like-num');
-  heart.textContent = likes[id]?'❤️':'🤍';
-  num.textContent = count;
+  btn.querySelector('.heart').textContent = likes[id]?'❤️':'🤍';
+  btn.querySelector('.like-num').textContent = count;
   btn.classList.toggle('liked', !!likes[id]);
-  if(currentId===id) {
+  if(currentId===id){
     document.getElementById('mLikeBtn').classList.toggle('liked', !!likes[id]);
     document.getElementById('mLikeCount').textContent = count;
   }
 }
 
-function toggleLikeModal() {
+function toggleLikeModal(){
   const btn = document.querySelector(`.card[onclick="openCard(${currentId})"] .like-btn`);
-  if(btn) { toggleLike(currentId, btn); return; }
+  if(btn){ toggleLike(currentId, btn); return; }
   likes[currentId] = !likes[currentId];
   saveLikes();
   const idea = ideas.find(i=>i.id===currentId);
   const count = (idea.likes||0) + (likes[currentId]?1:0);
-  const mBtn = document.getElementById('mLikeBtn');
-  mBtn.classList.toggle('liked', !!likes[currentId]);
+  document.getElementById('mLikeBtn').classList.toggle('liked', !!likes[currentId]);
   document.getElementById('mLikeCount').textContent = count;
   renderGrid();
 }
 
-// ── CARD MODAL ──
-function openCard(id) {
+function openCard(id){
   const idea = ideas.find(i=>i.id===id);
   if(!idea) return;
   currentId = id;
@@ -420,21 +366,26 @@ function openCard(id) {
     idea.diff?`<span class="info-chip">💪 ${idea.diff}</span>`:'',
     ...(idea.tags||[]).map(t=>`<span class="info-chip">${t}</span>`)
   ].join('');
-  const mLikeBtn = document.getElementById('mLikeBtn');
-  mLikeBtn.classList.toggle('liked', liked);
-  document.getElementById('mLikeCount').textContent = count;
-  if(idea.maps) {
-    const a = document.getElementById('mMaps');
-    a.href = idea.maps;
-    a.style.display='flex';
+  const gallery = document.getElementById('mGallery');
+  if(idea.gallery && idea.gallery.length > 1){
+    gallery.style.display='grid';
+    gallery.innerHTML = idea.gallery.slice(1).map(f=>
+      `<img src="${f}" alt="foto" loading="lazy" onclick="window.open('${f}','_blank')">`
+    ).join('');
   } else {
-    document.getElementById('mMaps').style.display='none';
+    gallery.style.display='none';
+    gallery.innerHTML='';
   }
+  document.getElementById('mLikeBtn').classList.toggle('liked', liked);
+  document.getElementById('mLikeCount').textContent = count;
+  const a = document.getElementById('mMaps');
+  if(idea.maps){ a.href=idea.maps; a.style.display='flex'; }
+  else { a.style.display='none'; }
   document.getElementById('cardOverlay').classList.add('open');
   document.body.style.overflow='hidden';
 }
 
-function closeModal(id) {
+function closeModal(id){
   document.getElementById(id).classList.remove('open');
   document.body.style.overflow='';
 }
@@ -443,7 +394,6 @@ document.getElementById('cardOverlay').addEventListener('click',function(e){if(e
 document.getElementById('addOverlay').addEventListener('click',function(e){if(e.target===this)closeModal('addOverlay');});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal('cardOverlay');closeModal('addOverlay');}});
 
-// ── FILTRI ──
 document.querySelectorAll('.filter-btn').forEach(btn=>{
   btn.addEventListener('click',()=>{
     document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
@@ -453,41 +403,37 @@ document.querySelectorAll('.filter-btn').forEach(btn=>{
   });
 });
 
-// ── ADD FORM ──
-function openAddForm() {
+function openAddForm(){
   document.getElementById('addOverlay').classList.add('open');
   document.body.style.overflow='hidden';
 }
 
-function submitIdea(e) {
+function submitIdea(e){
   e.preventDefault();
-  const title = document.getElementById('fTitle').value.trim();
-  const cat = document.getElementById('fCat').value;
-  const desc = document.getElementById('fDesc').value.trim();
-  const dist = document.getElementById('fDist').value.trim();
-  const dur = document.getElementById('fDur').value.trim();
-  const diff = document.getElementById('fDiff').value;
-  const maps = document.getElementById('fMaps').value.trim();
+  const title=document.getElementById('fTitle').value.trim();
+  const cat=document.getElementById('fCat').value;
   if(!title||!cat) return;
-  const newIdea = {
-    id: Date.now(), cat, title,
-    desc: desc||'Nessuna descrizione.',
-    dist, dur, diff,
-    img: cat==='trekking'?'hiking-nature-new':'cycling-new-route',
-    maps: maps||'', tags:[], likes:0
+  const newIdea={
+    id:Date.now(), cat, title,
+    desc:document.getElementById('fDesc').value.trim()||'Nessuna descrizione.',
+    dist:document.getElementById('fDist').value.trim(),
+    dur:document.getElementById('fDur').value.trim(),
+    diff:document.getElementById('fDiff').value,
+    img:cat==='trekking'?'hiking-nature-new':'cycling-new-route',
+    maps:document.getElementById('fMaps').value.trim(),
+    tags:[], likes:0
   };
   ideas.push(newIdea);
-  try {
-    const saved = JSON.parse(localStorage.getItem('wb_ideas')||'[]');
+  try{
+    const saved=JSON.parse(localStorage.getItem('wb_ideas')||'[]');
     saved.push(newIdea);
-    localStorage.setItem('wb_ideas', JSON.stringify(saved));
-  } catch(ex){}
+    localStorage.setItem('wb_ideas',JSON.stringify(saved));
+  }catch(ex){}
   closeModal('addOverlay');
   e.target.reset();
   renderGrid();
 }
 
-// ── DARK MODE ──
 (function(){
   const t=document.querySelector('[data-theme-toggle]'),r=document.documentElement;
   let d=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
@@ -501,7 +447,6 @@ function submitIdea(e) {
   });
 })();
 
-// ── INIT ──
 renderGrid();
 </script>
 </body>
