@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekend Board 🏕️</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#f7f5f0;--surface:#fff;--surface2:#f0ede6;--border:rgba(0,0,0,0.09);
+  --text:#1a1814;--muted:#6b6760;--faint:#b0ada8;
+  --green:#2d7a4f;--green-light:#e8f5ee;--green-hover:#235f3d;
+  --blue:#1e5f9e;--blue-light:#e6f0fb;
+  --gold:#c9920a;--radius:1rem;--shadow:0 2px 12px rgba(0,0,0,0.08);
+  --shadow-lg:0 8px 32px rgba(0,0,0,0.12);
+}
+[data-theme=dark]{
+  --bg:#14120e;--surface:#1c1a15;--surface2:#22201a;--border:rgba(255,255,255,0.09);
+  --text:#e5e2db;--muted:#908d86;--faint:#555250;
+  --green:#4aaa72;--green-light:#1a2e22;--green-hover:#3d9460;
+  --blue:#5b9dd4;--blue-light:#162038;
+  --shadow:0 2px 12px rgba(0,0,0,0.3);--shadow-lg:0 8px 32px rgba(0,0,0,0.4);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+img{display:block;max-width:100%}
+button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
+a{color:inherit;text-decoration:none}
+
+/* NAV */
+nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.5rem;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:var(--shadow)}
+.logo{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;display:flex;align-items:center;gap:.5rem}
+.nav-right{display:flex;align-items:center;gap:.75rem}
+.btn-add{background:var(--green);color:#fff;padding:.45rem 1.1rem;border-radius:2rem;font-size:.85rem;font-weight:600;transition:background .18s}
+.btn-add:hover{background:var(--green-hover)}
+.btn-theme{padding:.4rem;border-radius:2rem;border:1.5px solid var(--border);display:flex;align-items:center;transition:background .18s}
+.btn-theme:hover{background:var(--surface2)}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#2d7a4f 0%,#1e5f9e 100%);color:#fff;padding:2.5rem 1.5rem 3rem;text-align:center}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:.5rem}
+.hero p{opacity:.85;font-size:1rem;max-width:44ch;margin:0 auto}
+
+/* FILTERS */
+.filters{max-width:1100px;margin:0 auto;padding:1.75rem 1.5rem .5rem;display:flex;gap:.6rem;flex-wrap:wrap}
+.filter-btn{padding:.5rem 1.1rem;border-radius:2rem;border:1.5px solid var(--border);font-size:.85rem;font-weight:500;background:var(--surface);transition:all .18s;white-space:nowrap}
+.filter-btn:hover,.filter-btn.active{border-color:var(--green);background:var(--green-light);color:var(--green)}
+
+/* GRID */
+.grid{max-width:1100px;margin:0 auto;padding:1rem 1.5rem 3rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem}
+
+/* CARD */
+.card{background:var(--surface);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s;cursor:pointer}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.card-img{aspect-ratio:16/9;overflow:hidden;position:relative}
+.card-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.card:hover .card-img img{transform:scale(1.04)}
+.cat-badge{position:absolute;top:.7rem;left:.7rem;padding:.25rem .65rem;border-radius:2rem;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;backdrop-filter:blur(8px)}
+.cat-trekking{background:rgba(45,122,79,.85);color:#fff}
+.cat-bici{background:rgba(30,95,158,.85);color:#fff}
+.card-body{padding:1rem 1.1rem 1.1rem}
+.card-cat{font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:.3rem}
+.cat-trekking-text{color:var(--green)}
+.cat-bici-text{color:var(--blue)}
+.card-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:600;line-height:1.3;margin-bottom:.35rem}
+.card-desc{font-size:.82rem;color:var(--muted);line-height:1.55;margin-bottom:.75rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card-footer{display:flex;align-items:center;justify-content:space-between}
+.card-meta{display:flex;gap:.5rem;flex-wrap:wrap}
+.tag{font-size:.7rem;padding:.2rem .55rem;background:var(--surface2);border-radius:2rem;color:var(--muted)}
+.like-btn{display:flex;align-items:center;gap:.4rem;padding:.35rem .85rem;border-radius:2rem;border:1.5px solid var(--border);font-size:.85rem;font-weight:600;transition:all .18s;background:var(--surface)}
+.like-btn:hover{border-color:#e55;background:#fff0f0}
+.like-btn.liked{border-color:#e55;background:#fff0f0;color:#e55}
+.like-btn .heart{font-size:.95rem;transition:transform .15s}
+.like-btn:active .heart{transform:scale(1.4)}
+
+/* EMPTY */
+.empty{text-align:center;padding:4rem 1.5rem;color:var(--muted);grid-column:1/-1}
+.empty-icon{font-size:3rem;margin-bottom:1rem}
+
+/* MODAL */
+.overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.5);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:1rem}
+.overlay.open{display:flex}
+.modal{background:var(--surface);border-radius:1.5rem;max-width:520px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg);position:relative}
+.modal-img{aspect-ratio:16/9;overflow:hidden;border-radius:1.5rem 1.5rem 0 0}
+.modal-img img{width:100%;height:100%;object-fit:cover}
+.modal-body{padding:1.5rem}
+.modal-cat{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:.35rem}
+.modal-title{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;margin-bottom:.6rem}
+.modal-desc{color:var(--muted);font-size:.92rem;line-height:1.7;margin-bottom:1rem}
+.modal-info{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1.25rem}
+.info-chip{display:flex;align-items:center;gap:.3rem;font-size:.8rem;padding:.3rem .7rem;background:var(--surface2);border-radius:2rem;color:var(--muted)}
+.modal-actions{display:flex;gap:.75rem}
+.modal-like{flex:1;padding:.7rem;border-radius:2rem;font-weight:600;font-size:.9rem;border:1.5px solid var(--border);transition:all .18s;display:flex;align-items:center;justify-content:center;gap:.4rem}
+.modal-like:hover,.modal-like.liked{border-color:#e55;background:#fff0f0;color:#e55}
+.modal-maps{flex:1;padding:.7rem;border-radius:2rem;font-weight:600;font-size:.9rem;background:var(--green);color:#fff;text-align:center;display:flex;align-items:center;justify-content:center;gap:.4rem;transition:background .18s}
+.modal-maps:hover{background:var(--green-hover)}
+.close-btn{position:absolute;top:.9rem;right:.9rem;background:rgba(255,255,255,.9);backdrop-filter:blur(4px);border-radius:2rem;padding:.4rem;display:flex;box-shadow:var(--shadow);transition:background .18s}
+.close-btn:hover{background:#fff}
+
+/* ADD FORM MODAL */
+.form-modal{background:var(--surface);border-radius:1.5rem;max-width:480px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg);padding:1.75rem}
+.form-title{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;margin-bottom:1.25rem}
+.field{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem}
+.field label{font-size:.82rem;font-weight:600;color:var(--muted)}
+.field input,.field textarea,.field select{border:1.5px solid var(--border);border-radius:.6rem;padding:.6rem .85rem;font:inherit;font-size:.9rem;background:var(--bg);color:var(--text);outline:none;transition:border-color .18s}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--green)}
+.field textarea{resize:vertical;min-height:80px}
+.form-actions{display:flex;gap:.75rem;margin-top:1.25rem}
+.btn-submit{flex:1;padding:.7rem;border-radius:2rem;background:var(--green);color:#fff;font-weight:600;font-size:.9rem;transition:background .18s}
+.btn-submit:hover{background:var(--green-hover)}
+.btn-cancel{flex:1;padding:.7rem;border-radius:2rem;border:1.5px solid var(--border);font-weight:600;font-size:.9rem;transition:background .18s}
+.btn-cancel:hover{background:var(--surface2)}
+
+/* RESPONSIVE */
+@media(max-width:500px){
+  nav{padding:0 1rem}
+  .grid{padding:1rem 1rem 3rem}
+  .filters{padding:1.5rem 1rem .5rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">🏕️ Weekend Board</div>
+  <div class="nav-right">
+    <button class="btn-add" onclick="openAddForm()">+ Aggiungi idea</button>
+    <button class="btn-theme" data-theme-toggle aria-label="Tema">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
+</nav>
+
+<div class="hero">
+  <h1>Idee per il weekend 🌿</h1>
+  <p>Scopri, vota le idee migliori e pianifica il prossimo weekend con il gruppo</p>
+</div>
+
+<div class="filters">
+  <button class="filter-btn active" data-filter="all">🗺️ Tutte</button>
+  <button class="filter-btn" data-filter="trekking">🥾 Trekking facili</button>
+  <button class="filter-btn" data-filter="bici">🚲 Giri in bici</button>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<!-- CARD MODAL -->
+<div class="overlay" id="cardOverlay">
+  <div class="modal">
+    <button class="close-btn" onclick="closeModal('cardOverlay')">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="modal-img"><img id="mImg" src="" alt=""></div>
+    <div class="modal-body">
+      <div class="modal-cat" id="mCat"></div>
+      <h2 class="modal-title" id="mTitle"></h2>
+      <p class="modal-desc" id="mDesc"></p>
+      <div class="modal-info" id="mInfo"></div>
+      <div class="modal-actions">
+        <button class="modal-like" id="mLikeBtn" onclick="toggleLikeModal()">❤️ <span id="mLikeCount"></span> Mi piace</button>
+        <a class="modal-maps" id="mMaps" href="#" target="_blank" rel="noopener">📍 Google Maps</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ADD FORM MODAL -->
+<div class="overlay" id="addOverlay">
+  <div class="form-modal">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem">
+      <div class="form-title" style="margin:0">➕ Nuova idea</div>
+      <button class="close-btn" style="position:static;box-shadow:none" onclick="closeModal('addOverlay')">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <form onsubmit="submitIdea(event)">
+      <div class="field">
+        <label>Titolo *</label>
+        <input type="text" id="fTitle" placeholder="es. Lago di Lugano in bici" required>
+      </div>
+      <div class="field">
+        <label>Categoria *</label>
+        <select id="fCat" required>
+          <option value="">— scegli —</option>
+          <option value="trekking">🥾 Trekking facile</option>
+          <option value="bici">🚲 Giro in bici</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Descrizione</label>
+        <textarea id="fDesc" placeholder="Dove si va, quanto dura, cosa si vede…"></textarea>
+      </div>
+      <div class="field">
+        <label>Distanza (es. 12 km)</label>
+        <input type="text" id="fDist" placeholder="12 km">
+      </div>
+      <div class="field">
+        <label>Durata (es. 3h)</label>
+        <input type="text" id="fDur" placeholder="3h">
+      </div>
+      <div class="field">
+        <label>Difficoltà</label>
+        <select id="fDiff">
+          <option value="">—</option>
+          <option value="Facile">Facile</option>
+          <option value="Media">Media</option>
+          <option value="Impegnativa">Impegnativa</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Link Google Maps</label>
+        <input type="url" id="fMaps" placeholder="https://maps.google.com/...">
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn-cancel" onclick="closeModal('addOverlay')">Annulla</button>
+        <button type="submit" class="btn-submit">✅ Aggiungi</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+// ── DATI INIZIALI ──
+let ideas = [
+  {
+    id:1, cat:'trekking', title:'Sentiero del Tinazzo — Prealpi Varesine',
+    desc:'Anello di 8 km tra boschi di castagni e punti panoramici sulle Alpi. Partenza da Arcisate, dislivello 350 m. Ottimo per iniziare la stagione, adatto a tutti.',
+    dist:'8 km', dur:'3h', diff:'Facile', img:'forest-trail-alps',
+    maps:'https://maps.google.com/?q=Arcisate+Varese',
+    tags:['Bosco','Panorama','Famiglie'], likes:3
+  },
+  {
+    id:2, cat:'trekking', title:'Lago di Segrino — Triangolo Lariano',
+    desc:'Giro completo del piccolo lago glaciale (3 km) più salita panoramica verso il Monte Cornizzolo. Paesaggio bellissimo, acqua cristallina, bar sul lago.',
+    dist:'7 km', dur:'2.5h', diff:'Facile', img:'mountain-lake-hiking',
+    maps:'https://maps.google.com/?q=Lago+di+Segrino+Como',
+    tags:['Lago','Vista','Como'], likes:5
+  },
+  {
+    id:3, cat:'trekking', title:'Sacro Monte di Varese',
+    desc:'Percorso lastricato di 2 km che sale tra 14 cappelle barocche fino al borgo medievale di Santa Maria del Monte. UNESCO, storico, facile per tutti.',
+    dist:'4 km', dur:'1.5h', diff:'Facile', img:'sacro-monte-path',
+    maps:'https://maps.google.com/?q=Sacro+Monte+Varese',
+    tags:['UNESCO','Storico','Panorama'], likes:4
+  },
+  {
+    id:4, cat:'trekking', title:'Tre Corni — Prealpi Bergamasche',
+    desc:'Escursione a tre cime panoramiche sopra il paese di Adrara San Martino (BG). Paesaggio aperto, vista su lago d\'Iseo e pianura. Dislivello 500 m.',
+    dist:'10 km', dur:'3.5h', diff:'Facile', img:'hills-panorama-lombardia',
+    maps:'https://maps.google.com/?q=Adrara+San+Martino+Bergamo',
+    tags:['Cime','Lago d\'Iseo','Bergamo'], likes:2
+  },
+  {
+    id:5, cat:'bici', title:'Parco Nord Milano',
+    desc:'Anello di 15 km tutto pianeggiante nel Parco Nord di Milano. Piste ciclabili dedicate, laghetti, boschi urbani. Partenza da Sesto San Giovanni, zero traffico.',
+    dist:'15 km', dur:'1.5h', diff:'Facile', img:'cycling-park-milan',
+    maps:'https://maps.google.com/?q=Parco+Nord+Milano',
+    tags:['Pianura','Urbano','Famiglia'], likes:6
+  },
+  {
+    id:6, cat:'bici', title:'Parco di Monza',
+    desc:'Giro del Parco di Monza: 15 km su strade interne chiuse al traffico tra il Parco Reale, il laghetto e i boschi storici. Si può abbinare alla visita della Villa Reale.',
+    dist:'15 km', dur:'2h', diff:'Facile', img:'monza-park-cycling',
+    maps:'https://maps.google.com/?q=Parco+di+Monza',
+    tags:['Parco Reale','Storico','Monza'], likes:7
+  },
+  {
+    id:7, cat:'bici', title:'Parco delle Cave — Milano Ovest',
+    desc:'Percorso ciclabile di 12 km tra i laghetti del Parco delle Cave a Baggio. Ambiente naturale sorprendente nel cuore della periferia ovest di Milano. Ideale per famiglie.',
+    dist:'12 km', dur:'1.5h', diff:'Facile', img:'lake-park-cycling',
+    maps:'https://maps.google.com/?q=Parco+delle+Cave+Milano',
+    tags:['Laghetti','Milano','Famiglie'], likes:4
+  },
+  {
+    id:8, cat:'bici', title:'Milano → Monza via Parco Nord',
+    desc:'Itinerario punto-punto da Porta Nuova fino al centro di Monza (22 km) seguendo la ciclabile del Parco Nord e il Lambro. Quasi tutto su pista dedicata.',
+    dist:'22 km', dur:'2.5h', diff:'Facile', img:'cycling-route-countryside',
+    maps:'https://maps.google.com/?q=Parco+Nord+Milano+Monza',
+    tags:['Punto-punto','Lambro','22 km'], likes:5
+  }
+];
+
+let likes = {};
+let currentId = null;
+let activeFilter = 'all';
+
+// Carica likes da localStorage
+try {
+  const saved = localStorage.getItem('wb_likes');
+  if(saved) likes = JSON.parse(saved);
+  const savedIdeas = localStorage.getItem('wb_ideas');
+  if(savedIdeas) {
+    const extra = JSON.parse(savedIdeas);
+    ideas = ideas.concat(extra);
+  }
+} catch(e){}
+
+function saveLikes() {
+  try { localStorage.setItem('wb_likes', JSON.stringify(likes)); } catch(e){}
+}
+
+// ── RENDER ──
+function imgUrl(seed) {
+  return 'https://picsum.photos/seed/'+seed+'/640/360';
+}
+
+function catLabel(cat) {
+  return cat==='trekking' ? '🥾 Trekking facile' : '🚲 Giro in bici';
+}
+function catClass(cat) {
+  return cat==='trekking' ? 'cat-trekking' : 'cat-bici';
+}
+function catTextClass(cat) {
+  return cat==='trekking' ? 'cat-trekking-text' : 'cat-bici-text';
+}
+
+function renderGrid() {
+  const filtered = ideas.filter(i => activeFilter==='all' || i.cat===activeFilter);
+  const grid = document.getElementById('grid');
+  if(!filtered.length) {
+    grid.innerHTML = '<div class="empty"><div class="empty-icon">🌿</div><p>Nessuna idea qui ancora.<br>Aggiungine una!</p></div>';
+    return;
+  }
+  grid.innerHTML = filtered.map(idea => {
+    const liked = !!likes[idea.id];
+    const likeCount = (idea.likes||0) + (liked ? 1 : 0);
+    return `
+    <div class="card" onclick="openCard(${idea.id})">
+      <div class="card-img">
+        <img src="${imgUrl(idea.img)}" alt="${idea.title}" width="640" height="360" loading="lazy">
+        <div class="cat-badge ${catClass(idea.cat)}">${catLabel(idea.cat)}</div>
+      </div>
+      <div class="card-body">
+        <div class="card-cat ${catTextClass(idea.cat)}">${catLabel(idea.cat)}</div>
+        <div class="card-title">${idea.title}</div>
+        <div class="card-desc">${idea.desc}</div>
+        <div class="card-footer">
+          <div class="card-meta">
+            ${idea.dist?`<span class="tag">📏 ${idea.dist}</span>`:''}
+            ${idea.dur?`<span class="tag">⏱ ${idea.dur}</span>`:''}
+            ${idea.diff?`<span class="tag">${idea.diff}</span>`:''}
+          </div>
+          <button class="like-btn ${liked?'liked':''}" onclick="event.stopPropagation();toggleLike(${idea.id},this)">
+            <span class="heart">${liked?'❤️':'🤍'}</span>
+            <span class="like-num">${likeCount}</span>
+          </button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ── LIKE ──
+function toggleLike(id, btn) {
+  likes[id] = !likes[id];
+  saveLikes();
+  const idea = ideas.find(i=>i.id===id);
+  const count = (idea.likes||0) + (likes[id]?1:0);
+  const heart = btn.querySelector('.heart');
+  const num = btn.querySelector('.like-num');
+  heart.textContent = likes[id]?'❤️':'🤍';
+  num.textContent = count;
+  btn.classList.toggle('liked', !!likes[id]);
+  if(currentId===id) {
+    document.getElementById('mLikeBtn').classList.toggle('liked', !!likes[id]);
+    document.getElementById('mLikeCount').textContent = count;
+  }
+}
+
+function toggleLikeModal() {
+  const btn = document.querySelector(`.card[onclick="openCard(${currentId})"] .like-btn`);
+  if(btn) { toggleLike(currentId, btn); return; }
+  likes[currentId] = !likes[currentId];
+  saveLikes();
+  const idea = ideas.find(i=>i.id===currentId);
+  const count = (idea.likes||0) + (likes[currentId]?1:0);
+  const mBtn = document.getElementById('mLikeBtn');
+  mBtn.classList.toggle('liked', !!likes[currentId]);
+  document.getElementById('mLikeCount').textContent = count;
+  renderGrid();
+}
+
+// ── CARD MODAL ──
+function openCard(id) {
+  const idea = ideas.find(i=>i.id===id);
+  if(!idea) return;
+  currentId = id;
+  const liked = !!likes[id];
+  const count = (idea.likes||0) + (liked?1:0);
+  document.getElementById('mImg').src = imgUrl(idea.img);
+  document.getElementById('mImg').alt = idea.title;
+  document.getElementById('mCat').className = 'modal-cat '+catTextClass(idea.cat);
+  document.getElementById('mCat').textContent = catLabel(idea.cat);
+  document.getElementById('mTitle').textContent = idea.title;
+  document.getElementById('mDesc').textContent = idea.desc;
+  document.getElementById('mInfo').innerHTML = [
+    idea.dist?`<span class="info-chip">📏 ${idea.dist}</span>`:'',
+    idea.dur?`<span class="info-chip">⏱ ${idea.dur}</span>`:'',
+    idea.diff?`<span class="info-chip">💪 ${idea.diff}</span>`:'',
+    ...(idea.tags||[]).map(t=>`<span class="info-chip">${t}</span>`)
+  ].join('');
+  const mLikeBtn = document.getElementById('mLikeBtn');
+  mLikeBtn.classList.toggle('liked', liked);
+  document.getElementById('mLikeCount').textContent = count;
+  if(idea.maps) {
+    const a = document.getElementById('mMaps');
+    a.href = idea.maps;
+    a.style.display='flex';
+  } else {
+    document.getElementById('mMaps').style.display='none';
+  }
+  document.getElementById('cardOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow='';
+}
+
+document.getElementById('cardOverlay').addEventListener('click',function(e){if(e.target===this)closeModal('cardOverlay');});
+document.getElementById('addOverlay').addEventListener('click',function(e){if(e.target===this)closeModal('addOverlay');});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal('cardOverlay');closeModal('addOverlay');}});
+
+// ── FILTRI ──
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    activeFilter=btn.dataset.filter;
+    renderGrid();
+  });
+});
+
+// ── ADD FORM ──
+function openAddForm() {
+  document.getElementById('addOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function submitIdea(e) {
+  e.preventDefault();
+  const title = document.getElementById('fTitle').value.trim();
+  const cat = document.getElementById('fCat').value;
+  const desc = document.getElementById('fDesc').value.trim();
+  const dist = document.getElementById('fDist').value.trim();
+  const dur = document.getElementById('fDur').value.trim();
+  const diff = document.getElementById('fDiff').value;
+  const maps = document.getElementById('fMaps').value.trim();
+  if(!title||!cat) return;
+  const newIdea = {
+    id: Date.now(), cat, title,
+    desc: desc||'Nessuna descrizione.',
+    dist, dur, diff,
+    img: cat==='trekking'?'hiking-nature-new':'cycling-new-route',
+    maps: maps||'', tags:[], likes:0
+  };
+  ideas.push(newIdea);
+  try {
+    const saved = JSON.parse(localStorage.getItem('wb_ideas')||'[]');
+    saved.push(newIdea);
+    localStorage.setItem('wb_ideas', JSON.stringify(saved));
+  } catch(ex){}
+  closeModal('addOverlay');
+  e.target.reset();
+  renderGrid();
+}
+
+// ── DARK MODE ──
+(function(){
+  const t=document.querySelector('[data-theme-toggle]'),r=document.documentElement;
+  let d=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+  r.setAttribute('data-theme',d);
+  t&&t.addEventListener('click',()=>{
+    d=d==='dark'?'light':'dark';
+    r.setAttribute('data-theme',d);
+    t.innerHTML=d==='dark'
+      ?'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
+      :'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  });
+})();
+
+// ── INIT ──
+renderGrid();
+</script>
+</body>
+</html>
