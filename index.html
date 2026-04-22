@@ -336,13 +336,35 @@ let ideas = [
     maps:'https://maps.google.com/?q=Bosco+in+Citta+Milano',
     tags:['Milano','Cani OK','Prati','Laghetti'], likes:4
   },
-  {
-    id:17, cat:'picnic', title:'Parco di Monza — Pic-nic nei prati reali',
-    desc:"Il Parco di Monza è uno dei parchi recintati più grandi d'Europa con i suoi 685 ettari. I prati del Parco Reale, vicino alla Villa, sono perfetti per stendere la coperta. Atmosfera storica unica, fontane, boschi, e la pista dell'autodromo sullo sfondo.",
-    dist:'—', dur:'Giornata', diff:'Facile', img:'monza-park-royal-picnic',
-    maps:'https://maps.google.com/?q=Villa+Reale+Monza',
-    tags:['Monza','Storico','685 ettari','Cani OK'], likes:6
-  }
+{
+  id:17, cat:'picnic', title:'Parco di Monza — Pic-nic nei prati reali',
+  desc:"Uno dei parchi recintati più grandi d'Europa: 685 ettari di prati, boschi, viali alberati e scorci storici da cartolina. I prati attorno alla Villa Reale sono il posto perfetto per stendere la coperta e godersi una giornata all'aperto. Da non perdere una visita all'Azienda Agricola Mulino San Giorgio, fattoria storica all'interno del parco dove si producono formaggi, yogurt e miele acquistabili direttamente. Ideale per bambini e per chi ama la natura a pochi passi dalla città.",
+  dist:'—', dur:'Giornata', diff:'Facile',
+  img:'parcomonza/copertina.jpg',
+  gallery:[
+    'parcomonza/copertina.jpg',
+    'parcomonza/foto1.jpg',
+    'parcomonza/foto2.jpg',
+    'parcomonza/foto3.jpg',
+    'parcomonza/foto4.jpg'
+  ],
+  maps:'https://maps.google.com/?q=Villa+Reale+Monza',
+  links:[
+    { label:'🌿 Natura nel Parco', url:'https://reggiadimonza.it/natura/' },
+    { label:'🌸 Giardini Reali',   url:'https://reggiadimonza.it/giardini-reali/' },
+    { label:'🏛️ Architetture',     url:'https://reggiadimonza.it/architetture/' }
+  ],
+  highlights:[
+    '🌾 Azienda Agricola Mulino San Giorgio — formaggi, yogurt e miele km0',
+    '🏛️ Villa Reale — capolavoro neoclassico di Luigi Cagnola (1777)',
+    '🌸 Giardini Reali — giardino all\'italiana con fontane e roseeto',
+    '🚗 Autodromo di Monza — la pista più famosa d\'Italia visibile dal parco',
+    '🦌 Recinto dei daini — area faunistica nel bosco',
+    '⛪ Cappella Espiatoria — memoriale di Re Umberto I',
+    '🐟 Laghetto di Conero — perfetto per una passeggiata dopo il picnic'
+  ],
+  tags:['Monza','Storico','685 ettari','Cani OK','Fattoria','Bambini'], likes:6
+}
 ];
 
 let likes = {};
