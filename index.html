@@ -321,6 +321,7 @@ function saveLikes() {
 
 // ── RENDER ──
 function imgUrl(seed) {
+  if(seed.startsWith('somasca/') || seed.startsWith('foto/') || seed.startsWith('http')) return seed;
   return 'https://picsum.photos/seed/'+seed+'/640/360';
 }
 
