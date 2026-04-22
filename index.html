@@ -12,6 +12,8 @@
   --text:#1a1814;--muted:#6b6760;--faint:#b0ada8;
   --green:#2d7a4f;--green-light:#e8f5ee;--green-hover:#235f3d;
   --blue:#1e5f9e;--blue-light:#e6f0fb;
+  --orange:#b85c00;--orange-light:#fef3e6;
+  --violet:#6b3fa0;--violet-light:#f3edfb;
   --gold:#c9920a;--radius:1rem;--shadow:0 2px 12px rgba(0,0,0,0.08);
   --shadow-lg:0 8px 32px rgba(0,0,0,0.12);
 }
@@ -20,6 +22,8 @@
   --text:#e5e2db;--muted:#908d86;--faint:#555250;
   --green:#4aaa72;--green-light:#1a2e22;--green-hover:#3d9460;
   --blue:#5b9dd4;--blue-light:#162038;
+  --orange:#e07b20;--orange-light:#2a1a08;
+  --violet:#a87ed4;--violet-light:#1e1228;
   --shadow:0 2px 12px rgba(0,0,0,0.3);--shadow-lg:0 8px 32px rgba(0,0,0,0.4);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -39,7 +43,12 @@ nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.
 .hero p{opacity:.85;font-size:1rem;max-width:44ch;margin:0 auto}
 .filters{max-width:1100px;margin:0 auto;padding:1.75rem 1.5rem .5rem;display:flex;gap:.6rem;flex-wrap:wrap}
 .filter-btn{padding:.5rem 1.1rem;border-radius:2rem;border:1.5px solid var(--border);font-size:.85rem;font-weight:500;background:var(--surface);transition:all .18s;white-space:nowrap}
-.filter-btn:hover,.filter-btn.active{border-color:var(--green);background:var(--green-light);color:var(--green)}
+.filter-btn:hover{background:var(--surface2)}
+.filter-btn.active[data-filter="all"],.filter-btn[data-filter="all"]:hover{border-color:var(--green);background:var(--green-light);color:var(--green)}
+.filter-btn.active[data-filter="trekking"],.filter-btn[data-filter="trekking"]:hover{border-color:var(--green);background:var(--green-light);color:var(--green)}
+.filter-btn.active[data-filter="trekking-medio"],.filter-btn[data-filter="trekking-medio"]:hover{border-color:var(--orange);background:var(--orange-light);color:var(--orange)}
+.filter-btn.active[data-filter="bici"],.filter-btn[data-filter="bici"]:hover{border-color:var(--blue);background:var(--blue-light);color:var(--blue)}
+.filter-btn.active[data-filter="picnic"],.filter-btn[data-filter="picnic"]:hover{border-color:var(--violet);background:var(--violet-light);color:var(--violet)}
 .grid{max-width:1100px;margin:0 auto;padding:1rem 1.5rem 3rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem}
 .card{background:var(--surface);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s;cursor:pointer}
 .card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
@@ -47,12 +56,16 @@ nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.
 .card-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
 .card:hover .card-img img{transform:scale(1.04)}
 .cat-badge{position:absolute;top:.7rem;left:.7rem;padding:.25rem .65rem;border-radius:2rem;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;backdrop-filter:blur(8px)}
-.cat-trekking{background:rgba(45,122,79,.85);color:#fff}
-.cat-bici{background:rgba(30,95,158,.85);color:#fff}
+.badge-trekking{background:rgba(45,122,79,.85);color:#fff}
+.badge-trekking-medio{background:rgba(184,92,0,.85);color:#fff}
+.badge-bici{background:rgba(30,95,158,.85);color:#fff}
+.badge-picnic{background:rgba(107,63,160,.85);color:#fff}
 .card-body{padding:1rem 1.1rem 1.1rem}
 .card-cat{font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:.3rem}
-.cat-trekking-text{color:var(--green)}
-.cat-bici-text{color:var(--blue)}
+.text-trekking{color:var(--green)}
+.text-trekking-medio{color:var(--orange)}
+.text-bici{color:var(--blue)}
+.text-picnic{color:var(--violet)}
 .card-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:600;line-height:1.3;margin-bottom:.35rem}
 .card-desc{font-size:.82rem;color:var(--muted);line-height:1.55;margin-bottom:.75rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .card-footer{display:flex;align-items:center;justify-content:space-between}
@@ -125,7 +138,9 @@ nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.
 <div class="filters">
   <button class="filter-btn active" data-filter="all">🗺️ Tutte</button>
   <button class="filter-btn" data-filter="trekking">🥾 Trekking facili</button>
+  <button class="filter-btn" data-filter="trekking-medio">🏔️ Trekking medi</button>
   <button class="filter-btn" data-filter="bici">🚲 Giri in bici</button>
+  <button class="filter-btn" data-filter="picnic">🧺 Pic-nic</button>
 </div>
 
 <div class="grid" id="grid"></div>
@@ -166,7 +181,9 @@ nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.
         <select id="fCat" required>
           <option value="">— scegli —</option>
           <option value="trekking">🥾 Trekking facile</option>
+          <option value="trekking-medio">🏔️ Trekking medio</option>
           <option value="bici">🚲 Giro in bici</option>
+          <option value="picnic">🧺 Pic-nic</option>
         </select>
       </div>
       <div class="field"><label>Descrizione</label><textarea id="fDesc" placeholder="Dove si va, quanto dura, cosa si vede…"></textarea></div>
@@ -190,7 +207,15 @@ nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.
 </div>
 
 <script>
+const CAT = {
+  'trekking':        { label:'🥾 Trekking facile',  badge:'badge-trekking',        text:'text-trekking' },
+  'trekking-medio':  { label:'🏔️ Trekking medio',   badge:'badge-trekking-medio',  text:'text-trekking-medio' },
+  'bici':            { label:'🚲 Giro in bici',      badge:'badge-bici',            text:'text-bici' },
+  'picnic':          { label:'🧺 Pic-nic',           badge:'badge-picnic',          text:'text-picnic' }
+};
+
 let ideas = [
+  // ── TREKKING FACILI ──
   {
     id:1, cat:'trekking', title:'Sentiero del Tinazzo — Prealpi Varesine',
     desc:'Anello di 8 km tra boschi di castagni e punti panoramici sulle Alpi. Partenza da Arcisate, dislivello 350 m. Ottimo per iniziare la stagione, adatto a tutti.',
@@ -214,11 +239,52 @@ let ideas = [
   },
   {
     id:4, cat:'trekking', title:'Tre Corni — Prealpi Bergamasche',
-    desc:"Escursione a tre cime panoramiche sopra il paese di Adrara San Martino (BG). Paesaggio aperto, vista su lago d'Iseo e pianura. Dislivello 500 m.",
+    desc:"Escursione a tre cime panoramiche sopra Adrara San Martino (BG). Paesaggio aperto, vista su lago d'Iseo e pianura. Dislivello 500 m.",
     dist:'10 km', dur:'3.5h', diff:'Facile', img:'hills-panorama-lombardia',
     maps:'https://maps.google.com/?q=Adrara+San+Martino+Bergamo',
     tags:["Cime","Lago d'Iseo","Bergamo"], likes:2
   },
+  {
+    id:9, cat:'trekking', title:"Sacro Monte di Somasca e Castello dell'Innominato",
+    desc:"Escursione adatta a tutti, bambini inclusi. Si parte dal parcheggio di Somasca e si sale tra boschi e storia fino al Sacro Monte e alle rovine del Castello dell'Innominato — quello manzoniano dei Promessi Sposi. La meta è il Rifugio Camposecco, dove chi vuole può pranzare al rifugio o con pranzo al sacco. Salita circa 1h–1h30, discesa 1h. Panorama sulle Prealpi Lecchesi.",
+    dist:'~5 km', dur:'2.5–3h totali', diff:'Facile',
+    img:'somasca/copertina.jpg',
+    gallery:['somasca/copertina.jpg','somasca/rocca-innominato.jpg','somasca/somasca.jpg','somasca/somasca2.jpg'],
+    maps:'https://maps.app.goo.gl/58dPiBFQ4w6WDXkD7',
+    tags:['Bambini OK','Storico','Rifugio','Promessi Sposi','300 m D+'], likes:0
+  },
+
+  // ── TREKKING MEDI ──
+  {
+    id:10, cat:'trekking-medio', title:"Alpe dei Vicerè — Monte Bolettone",
+    desc:"Classico della Brianza lecchese. Si parte dall'Alpe dei Vicerè (Albavilla) e si sale al Monte Bolettone con vista a 360° su Lago di Como, Lecco e le Alpi. Sentiero ben segnato, dislivello 440 m. Al Rifugio Mara si può mangiare.",
+    dist:'6.3 km', dur:'2.5h', diff:'Media', img:'mountain-como-lake-view',
+    maps:'https://maps.google.com/?q=Alpe+dei+Vicere+Albavilla+Como',
+    tags:['Vista Lago di Como','Rifugio','Como','440 m D+'], likes:4
+  },
+  {
+    id:11, cat:'trekking-medio', title:'Sentiero del Viandante — Tappa Lago di Como',
+    desc:"Tratto del celebre sentiero storico che percorreva la sponda orientale del Lago di Como. Panorami mozzafiato sul lago, borghi medievali, scalinate storiche. Ideale una singola tappa di 4-6 ore tra Varenna e Bellano.",
+    dist:'14 km', dur:'4–5h', diff:'Media', img:'lake-como-trail-historic',
+    maps:'https://maps.google.com/?q=Sentiero+del+Viandante+Varenna',
+    tags:['Lago di Como','Storico','Borghi','1700 m D+ tot'], likes:6
+  },
+  {
+    id:12, cat:'trekking-medio', title:'Presolana — Rifugio Baita Cassinelli',
+    desc:'Dal Passo della Presolana si sale al Rifugio Baita Cassinelli e alla Malga Cornetto, con panorami sulla Valle Seriana e le pareti della Presolana. Ambiente alpino spettacolare, ottimo pranzo al rifugio.',
+    dist:'10 km', dur:'4h', diff:'Media', img:'presolana-mountain-alpine',
+    maps:'https://maps.google.com/?q=Passo+della+Presolana+Bergamo',
+    tags:['Rifugio','Bergamo','Valle Seriana','415 m D+'], likes:3
+  },
+  {
+    id:13, cat:'trekking-medio', title:'Monte Canto — Anello da Carvico',
+    desc:'Anello panoramico sopra la Valle San Martino (BG). Il Monte Canto (898 m) offre una vista unica su Lago di Como, Lago di Garlate e Pianura Padana. Partenza da Carvico, sentiero ben tracciato.',
+    dist:'9 km', dur:'3h', diff:'Media', img:'monte-canto-bergamo-view',
+    maps:'https://maps.google.com/?q=Monte+Canto+Carvico+Bergamo',
+    tags:['Panorama','Bergamo','Anello','600 m D+'], likes:2
+  },
+
+  // ── GIRI IN BICI ──
   {
     id:5, cat:'bici', title:'Parco Nord Milano',
     desc:'Anello di 15 km tutto pianeggiante nel Parco Nord di Milano. Piste ciclabili dedicate, laghetti, boschi urbani. Partenza da Sesto San Giovanni, zero traffico.',
@@ -247,19 +313,35 @@ let ideas = [
     maps:'https://maps.google.com/?q=Parco+Nord+Milano+Monza',
     tags:['Punto-punto','Lambro','22 km'], likes:5
   },
+
+  // ── PIC-NIC ──
   {
-    id:9, cat:'trekking', title:"Sacro Monte di Somasca e Castello dell'Innominato",
-    desc:"Escursione adatta a tutti, bambini inclusi. Si parte dal parcheggio di Somasca e si sale tra boschi e storia fino al Sacro Monte di Somasca e alle rovine del Castello dell'Innominato — quello manzoniano dei Promessi Sposi. La meta è il Rifugio Camposecco, dove chi vuole può pranzare al rifugio oppure godersi una pausa con pranzo al sacco. Salita circa 1h–1h30, discesa 1h. Panorama sulle Prealpi Lecchesi.",
-    dist:'~5 km', dur:'2.5–3h totali', diff:'Facile',
-    img:'somasca/copertina.jpg',
-    gallery:[
-      'somasca/copertina.jpg',
-      'somasca/rocca-innominato.jpg',
-      'somasca/somasca.jpg',
-      'somasca/somasca2.jpg'
-    ],
-    maps:'https://maps.app.goo.gl/58dPiBFQ4w6WDXkD7',
-    tags:['Bambini OK','Storico','Rifugio','Promessi Sposi','300 m D+'], likes:0
+    id:14, cat:'picnic', title:"Alpe dei Vicerè — Prato panoramico",
+    desc:"L'Alpe dei Vicerè è una radura aperta a 900 m con vista sul Lago di Como e le Prealpi. Perfetta per un picnic all'aperto: prati ampi, tavoli in legno, aria pulita. Raggiungibile in auto o a piedi dal paese di Albavilla in 45 minuti.",
+    dist:'— (auto)', dur:'Giornata', diff:'Facile', img:'alpine-meadow-picnic',
+    maps:'https://maps.google.com/?q=Alpe+dei+Vicere+Albavilla',
+    tags:['Vista','Prati','Como','Tavoli'], likes:5
+  },
+  {
+    id:15, cat:'picnic', title:'Lago di Comabbio — Parco Berrini',
+    desc:"Il Parco Berrini di Ternate è il punto d'accesso principale al Lago di Comabbio. Aree pic-nic attrezzate con tavoli, parco giochi per i bambini, accesso diretto al lago. Cornice naturalistica tra ninfee e fiori di loto, con il famoso ponte sospeso sull'acqua.",
+    dist:'—', dur:'Giornata', diff:'Facile', img:'lake-picnic-varese',
+    maps:'https://maps.google.com/?q=Parco+Berrini+Ternate+Varese',
+    tags:['Lago','Bambini','Ninfee','Varese'], likes:7
+  },
+  {
+    id:16, cat:'picnic', title:"Bosco in Città — Milano",
+    desc:"Il Bosco in Città è un'oasi verde di 110 ettari nel cuore di Milano, tra via Novara e il Parco delle Cave. Prati sconfinati, alberi da frutto, laghetti e sentieri sterrati. Ideale per un picnic tranquillo a due passi dalla metropoli, con i bambini o il cane.",
+    dist:'—', dur:'Mezza giornata', diff:'Facile', img:'city-park-milan-green',
+    maps:'https://maps.google.com/?q=Bosco+in+Citta+Milano',
+    tags:['Milano','Cani OK','Prati','Laghetti'], likes:4
+  },
+  {
+    id:17, cat:'picnic', title:'Parco di Monza — Pic-nic nei prati reali',
+    desc:"Il Parco di Monza è uno dei parchi recintati più grandi d'Europa con i suoi 685 ettari. I prati del Parco Reale, vicino alla Villa, sono perfetti per stendere la coperta. Atmosfera storica unica, fontane, boschi, e la pista dell'autodromo sullo sfondo.",
+    dist:'—', dur:'Giornata', diff:'Facile', img:'monza-park-royal-picnic',
+    maps:'https://maps.google.com/?q=Villa+Reale+Monza',
+    tags:['Monza','Storico','685 ettari','Cani OK'], likes:6
   }
 ];
 
@@ -282,10 +364,6 @@ function imgUrl(src){
   return 'https://picsum.photos/seed/'+src+'/640/360';
 }
 
-function catLabel(cat){ return cat==='trekking' ? '🥾 Trekking facile' : '🚲 Giro in bici'; }
-function catClass(cat){ return cat==='trekking' ? 'cat-trekking' : 'cat-bici'; }
-function catTextClass(cat){ return cat==='trekking' ? 'cat-trekking-text' : 'cat-bici-text'; }
-
 function renderGrid(){
   const filtered = ideas.filter(i => activeFilter==='all' || i.cat===activeFilter);
   const grid = document.getElementById('grid');
@@ -294,16 +372,17 @@ function renderGrid(){
     return;
   }
   grid.innerHTML = filtered.map(idea => {
+    const c = CAT[idea.cat] || CAT['trekking'];
     const liked = !!likes[idea.id];
     const likeCount = (idea.likes||0) + (liked ? 1 : 0);
     return `
     <div class="card" onclick="openCard(${idea.id})">
       <div class="card-img">
         <img src="${imgUrl(idea.img)}" alt="${idea.title}" width="640" height="360" loading="lazy">
-        <div class="cat-badge ${catClass(idea.cat)}">${catLabel(idea.cat)}</div>
+        <div class="cat-badge ${c.badge}">${c.label}</div>
       </div>
       <div class="card-body">
-        <div class="card-cat ${catTextClass(idea.cat)}">${catLabel(idea.cat)}</div>
+        <div class="card-cat ${c.text}">${c.label}</div>
         <div class="card-title">${idea.title}</div>
         <div class="card-desc">${idea.desc}</div>
         <div class="card-footer">
@@ -352,12 +431,13 @@ function openCard(id){
   const idea = ideas.find(i=>i.id===id);
   if(!idea) return;
   currentId = id;
+  const c = CAT[idea.cat] || CAT['trekking'];
   const liked = !!likes[id];
   const count = (idea.likes||0) + (liked?1:0);
   document.getElementById('mImg').src = imgUrl(idea.img);
   document.getElementById('mImg').alt = idea.title;
-  document.getElementById('mCat').className = 'modal-cat '+catTextClass(idea.cat);
-  document.getElementById('mCat').textContent = catLabel(idea.cat);
+  document.getElementById('mCat').className = 'modal-cat '+c.text;
+  document.getElementById('mCat').textContent = c.label;
   document.getElementById('mTitle').textContent = idea.title;
   document.getElementById('mDesc').textContent = idea.desc;
   document.getElementById('mInfo').innerHTML = [
@@ -419,7 +499,7 @@ function submitIdea(e){
     dist:document.getElementById('fDist').value.trim(),
     dur:document.getElementById('fDur').value.trim(),
     diff:document.getElementById('fDiff').value,
-    img:cat==='trekking'?'hiking-nature-new':'cycling-new-route',
+    img:cat==='trekking'?'hiking-nature-new':cat==='picnic'?'picnic-nature-new':'cycling-new-route',
     maps:document.getElementById('fMaps').value.trim(),
     tags:[], likes:0
   };
