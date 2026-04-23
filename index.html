@@ -16,6 +16,7 @@
   --violet:#6b3fa0;--violet-light:#f3edfb;
   --gold:#c9920a;--radius:1rem;--shadow:0 2px 12px rgba(0,0,0,0.08);
   --shadow-lg:0 8px 32px rgba(0,0,0,0.12);
+  --coral:#c0392b;--coral-light:#fdecea;
 }
 [data-theme=dark]{
   --bg:#14120e;--surface:#1c1a15;--surface2:#22201a;--border:rgba(255,255,255,0.09);
@@ -60,6 +61,10 @@ nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.
 .badge-trekking-medio{background:rgba(184,92,0,.85);color:#fff}
 .badge-bici{background:rgba(30,95,158,.85);color:#fff}
 .badge-picnic{background:rgba(107,63,160,.85);color:#fff}
+.badge-adventure{background:rgba(192,57,43,.85);color:#fff}
+.text-adventure{color:var(--coral)}
+.filter-btn.active[data-filter="adventure"],
+.filter-btn[data-filter="adventure"]:hover{border-color:var(--coral);background:var(--coral-light);color:var(--coral)}
 .card-body{padding:1rem 1.1rem 1.1rem}
 .card-cat{font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:.3rem}
 .text-trekking{color:var(--green)}
@@ -141,6 +146,7 @@ nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.
   <button class="filter-btn" data-filter="trekking-medio">🏔️ Trekking medi</button>
   <button class="filter-btn" data-filter="bici">🚲 Giri in bici</button>
   <button class="filter-btn" data-filter="picnic">🧺 Pic-nic</button>
+  <button class="filter-btn" data-filter="adventure">🎢 Adventure & Fun</button>
 </div>
 
 <div class="grid" id="grid"></div>
@@ -211,7 +217,8 @@ const CAT = {
   'trekking':        { label:'🥾 Trekking facile',  badge:'badge-trekking',        text:'text-trekking' },
   'trekking-medio':  { label:'🏔️ Trekking medio',   badge:'badge-trekking-medio',  text:'text-trekking-medio' },
   'bici':            { label:'🚲 Giro in bici',      badge:'badge-bici',            text:'text-bici' },
-  'picnic':          { label:'🧺 Pic-nic',           badge:'badge-picnic',          text:'text-picnic' }
+  'picnic':          { label:'🧺 Pic-nic',           badge:'badge-picnic',          text:'text-picnic' },
+  'adventure': { label:'🎢 Adventure & Fun', badge:'badge-adventure', text:'text-adventure' }
 };
 
 let ideas = [
@@ -398,6 +405,69 @@ let ideas = [
     '🐟 Laghetto di Conero — perfetto per una passeggiata dopo il picnic'
   ],
   tags:['Monza','Storico','685 ettari','Cani OK','Fattoria','Bambini'], likes:6
+},
+
+  // ── ADVENTURE & FUN ──
+{
+  id:19, cat:'adventure', title:'Acquaworld — Acquapark Concorezzo',
+  desc:"Il più grande acquapark al coperto d'Europa, a Concorezzo (MB), aperto tutto l'anno. Scivoli di ogni tipo, piscine con onde, area relax con idromassaggio e sauna, zona bimbi con scivoli piccoli e giochi d'acqua. Perfetto anche quando il tempo è incerto — essendo coperto non dipende dal meteo. Consigliato prenotare online per evitare code nei weekend.",
+  dist:'Concorezzo (MB)', dur:'Giornata', diff:'Facile',
+  img:'https://picsum.photos/seed/acquapark-waterslide/640/360',
+  highlights:[
+    '🌊 Piscina con onde artificiali',
+    '🎢 Oltre 30 scivoli di tutte le difficoltà',
+    '👶 Area bimbi dedicata con scivoli piccoli',
+    '🧖 Zona wellness con sauna e idromassaggio',
+    '🏠 Tutto al coperto — funziona con qualsiasi meteo',
+    '🎟️ Consigliato prenotare online per risparmiare'
+  ],
+  links:[
+    { label:'🎟️ Sito ufficiale', url:'https://www.acquaworld.it' },
+    { label:'📍 Come arrivare', url:'https://maps.google.com/?q=Acquaworld+Concorezzo' }
+  ],
+  maps:'https://maps.google.com/?q=Acquaworld+Concorezzo',
+  tags:['Acquapark','Coperto','Bambini','Tutto l\'anno','Monza Brianza'], likes:0
+},
+{
+  id:20, cat:'adventure', title:'Fly Emotion — Parco Avventura Airuno',
+  desc:"Parco avventura tra gli alberi a Airuno (LC), sulle colline sopra l'Adda. Percorsi su fune e ponti tibetani a varie altezze, adatti da 4 anni in su. Il percorso più alto arriva a 15 metri tra le chiome degli alberi. Ambiente naturale bellissimo, istruttori presenti su tutti i percorsi. Ideale per famiglie, gruppi di amici o team building.",
+  dist:'Airuno (LC)', dur:'2–3h', diff:'Media',
+  img:'https://picsum.photos/seed/adventure-park-trees/640/360',
+  highlights:[
+    '🌲 Percorsi tra gli alberi fino a 15 metri di altezza',
+    '👶 Percorsi dedicati dai 4 anni in su',
+    '🪢 Ponti tibetani, teleferiche e zip-line',
+    '🏔️ Vista sulla Valle dell\'Adda',
+    '👷 Istruttori sempre presenti per la sicurezza',
+    '🎉 Ideale per compleanni e gruppi'
+  ],
+  links:[
+    { label:'🌐 Sito ufficiale', url:'https://www.flyemotion.it' },
+    { label:'📍 Come arrivare', url:'https://maps.google.com/?q=Fly+Emotion+Airuno+Lecco' }
+  ],
+  maps:'https://maps.google.com/?q=Fly+Emotion+Airuno+Lecco',
+  tags:['Parco Avventura','Bambini','Lecco','Alberi','Famiglie'], likes:0
+},
+{
+  id:21, cat:'adventure', title:'Bosco di Vanzago — Parco Avventura',
+  desc:"Il Parco Avventura del Bosco di Vanzago è immerso nell'oasi WWF a ovest di Milano, una delle aree naturali protette più vicine alla città. Percorsi avventura tra gli alberi di vari livelli, dal facile per i piccoli al difficile per i più temerari. Dopo l'avventura si può visitare l'oasi naturalistica con laghetti e birdwatching. Una giornata completa a soli 20 minuti da Milano.",
+  dist:'Vanzago (MI)', dur:'2–3h', diff:'Facile',
+  img:'https://picsum.photos/seed/forest-adventure-milan/640/360',
+  highlights:[
+    '🦅 Oasi WWF con birdwatching dopo l\'avventura',
+    '🌲 Percorsi per tutte le età e difficoltà',
+    '🏙️ A soli 20 minuti da Milano',
+    '🐦 Laghetti naturali e fauna selvatica',
+    '📸 Ambiente boschivo per foto bellissime',
+    '🅿️ Parcheggio gratuito'
+  ],
+  links:[
+    { label:'🌐 Sito ufficiale', url:'https://www.parcoadventure.com/vanzago' },
+    { label:'🦅 Oasi WWF Vanzago', url:'https://www.wwf.it/oasi/lombardia/bosco-di-vanzago/' },
+    { label:'📍 Come arrivare', url:'https://maps.google.com/?q=Bosco+di+Vanzago+Milano' }
+  ],
+  maps:'https://maps.google.com/?q=Bosco+di+Vanzago+Milano',
+  tags:['Parco Avventura','WWF','Milano','Oasi','20 min da Milano'], likes:0
 }
 ];
 
